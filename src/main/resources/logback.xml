@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true">
+    <property name="log.base" value="../webapps/seckill_logs" />
+    <jmxConfigurator />
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <Encoding>utf8</Encoding>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{80} - %msg%n</pattern>
+        </layout>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{80} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.base}.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.base}.%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <MaxHistory>30</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{80} - %msg%n</pattern>
+        </layout>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{80} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.seckill"><level value="DEBUG" /></logger>
+    <logger name="org.springframework"><level value="DEBUG" /></logger>
+    <logger name="org.mybatis.spring" level="DEBUG" />
+    <root>
+        <level value="INFO" />
+        <appender-ref ref="stdout" />
+        <appender-ref ref="logfile" />
+    </root>
+</configuration>
